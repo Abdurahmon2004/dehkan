@@ -66,7 +66,7 @@ class FullApiController extends Controller
 
     public function gallery(): JsonResponse
     {
-        $data = Gallery::all();
+        $data = ImageResource::collection(Gallery::paginate(10));
         return $this->data([
             'items' => $data,
             'pagination' => [
