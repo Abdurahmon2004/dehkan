@@ -30,7 +30,6 @@ class FullApiController extends Controller
            'data' => $data,
        ], $status);
    }
-
    public function siteInfo(): JsonResponse
    {
        $data = SiteInfo::first();
@@ -51,26 +50,67 @@ class FullApiController extends Controller
 
     public function slider(): JsonResponse
     {
-        $data = Slider::all();
-        return $this->data(SliderResource::collection($data));
+        $data = SliderResource::collection(Slider::paginate(10));
+        return $this->data([
+            'items' => $data,
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'next_page_url' => $data->nextPageUrl(),
+                'prev_page_url' => $data->previousPageUrl(),
+            ]
+        ]);
     }
 
     public function gallery(): JsonResponse
     {
         $data = Gallery::all();
-        return $this->data(ImageResource::collection($data));
+        return $this->data([
+            'items' => $data,
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'next_page_url' => $data->nextPageUrl(),
+                'prev_page_url' => $data->previousPageUrl(),
+            ]
+        ]);
     }
 
     public function social(): JsonResponse
     {
-        $data = SocialMedia::all();
-        return $this->data(SocialResource::collection($data));
+        $data = SocialResource::collection(SocialMedia::paginate(1));
+        return $this->data([
+            'items' => $data,
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'next_page_url' => $data->nextPageUrl(),
+                'prev_page_url' => $data->previousPageUrl(),
+            ]
+        ]);
     }
+
 
     public function video(): JsonResponse
     {
-        $data = Video::all();
-        return $this->data(VideoResource::collection($data));
+        $data = VideoResource::collection(Video::paginate(10));
+        return $this->data([
+            'items' => $data,
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'next_page_url' => $data->nextPageUrl(),
+                'prev_page_url' => $data->previousPageUrl(),
+            ]
+        ]);
     }
 
     public function contact(): JsonResponse
