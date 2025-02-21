@@ -13,4 +13,8 @@ Route::get('/slider', [FullApiController::class, 'slider']);
 Route::get('/social', [FullApiController::class, 'social']);
 Route::get('/gallery', [FullApiController::class, 'gallery']);
 Route::get('/videos', [FullApiController::class, 'video']);
+
+Route::get('/services', [FullApiController::class, 'services']);
+Route::get('/service/{id}', [FullApiController::class, 'serviceDetail']);
+
 Route::post('/contact', [FullApiController::class, 'contact']);

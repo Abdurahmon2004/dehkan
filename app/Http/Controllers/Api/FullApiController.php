@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AboutResource;
 use App\Http\Resources\ImageResource;
+use App\Http\Resources\ServiceResource;
+use App\Http\Resources\ServicesResource;
 use App\Http\Resources\SiteInfoResource;
 use App\Http\Resources\SliderResource;
 use App\Http\Resources\SocialResource;
@@ -12,6 +14,7 @@ use App\Http\Resources\VideoResource;
 use App\Models\About;
 use App\Models\Contact;
 use App\Models\Gallery;
+use App\Models\Service;
 use App\Models\SiteInfo;
 use App\Models\Slider;
 use App\Models\SocialMedia;
@@ -82,7 +85,7 @@ class FullApiController extends Controller
 
     public function social(): JsonResponse
     {
-        $data = SocialResource::collection(SocialMedia::paginate(1));
+        $data = SocialResource::collection(SocialMedia::paginate(10));
         return $this->data([
             'items' => $data,
             'pagination' => [
@@ -113,6 +116,30 @@ class FullApiController extends Controller
         ]);
     }
 
+    public function services(): JsonResponse
+    {
+        $data = ServicesResource::collection(Service::paginate(6));
+        return $this->data([
+            'items' => $data,
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'next_page_url' => $data->nextPageUrl(),
+                'prev_page_url' => $data->previousPageUrl(),
+            ]
+        ]);
+    }
+
+    public function serviceDetail($id): JsonResponse
+    {
+        $data = Service::find($id);
+        if(!$data){
+            return $this->data(null, 'Ma\'lumot topilmadi.');
+        }
+        return $this->data(ServiceResource::make($data));
+    }
     public function contact(): JsonResponse
     {
         $validator = Validator::make(request()->all(), [
