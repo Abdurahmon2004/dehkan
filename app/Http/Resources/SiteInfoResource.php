@@ -19,6 +19,7 @@ class SiteInfoResource extends JsonResource
             'phone' => $this->phone,
             'email' => $this->email,
             'address' => $this->address,
+            'description' => $this->address,
             'logo' => asset('storage/' . $this->logo)
         ];
     }

@@ -27,15 +27,14 @@ class ImageResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Rasm';
+        return 'Mahsulot';
     }
     public static function getPluralModelLabel(): string
     {
-        return 'Rasmlar'; // Default "Videos" o‘rniga chiqadigan nom
+        return 'Mahsulotlar'; // Default "Videos" o‘rniga chiqadigan nom
     }
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static ?string $navigationGroup = 'Media boshqaruvi';
-    protected static ?string $navigationLabel = 'Rasmlar';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationLabel = 'Mahsulotlar';
     protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
@@ -45,17 +44,35 @@ class ImageResource extends Resource
                     ->tabs([
                         Tab::make('O‘zbekcha')->schema([
                             TextInput::make('title.uz')
-                                ->label('Tekst (Uzbek)')
+                                ->label('Nomi (Uzbek)')
                                 ->required(),
                         ]),
                         Tab::make('Русский')->schema([
                             TextInput::make('title.ru')
-                                ->label('Tekst (Russian)')
+                                ->label('Nomi (Russian)')
                                 ->required(),
                         ]),
                         Tab::make('English')->schema([
                             TextInput::make('title.en')
-                                ->label('Tekst (English)')
+                                ->label('Nomi (English)')
+                                ->required(),
+                        ]),
+                    ])->columnSpanFull(),
+                Tabs::make('Translations')
+                    ->tabs([
+                        Tab::make('O‘zbekcha')->schema([
+                            TextInput::make('description.uz')
+                                ->label('Tavsifi (Uzbek)')
+                                ->required(),
+                        ]),
+                        Tab::make('Русский')->schema([
+                            TextInput::make('description.ru')
+                                ->label('Tavsifi (Russian)')
+                                ->required(),
+                        ]),
+                        Tab::make('English')->schema([
+                            TextInput::make('description.en')
+                                ->label('Tavsifi (English)')
                                 ->required(),
                         ]),
                     ])->columnSpanFull(),

@@ -16,8 +16,8 @@ class ImageResource extends JsonResource
     {
         return [
             'image' => asset('storage/'.$this->image),
-            'title' => $this->title
-
+            'title' => $this->title,
+            'description' => $this->description,
         ];
     }
 }

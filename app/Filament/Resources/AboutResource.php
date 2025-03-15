@@ -48,6 +48,7 @@ class AboutResource extends Resource
         return $form
             ->schema([
                 FileUpload::make('image')
+                ->multiple()
                 ->label('Rasmi')
                 ->directory('about')
                 ->image()
@@ -70,7 +71,7 @@ class AboutResource extends Resource
                                 ->label('Tavsifi (English)')
                                 ->required(),
                         ]),
-                    ])->columnSpanFull()
+                    ])
             ]);
     }
 

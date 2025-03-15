@@ -12,4 +12,23 @@ class About extends Model
 
     public $translatable = ['description'];
 
+    protected $casts = [
+        'image' => 'array', // Rasm array sifatida saqlanadi
+    ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            if ($model->image) {
+                foreach ($model->image as $image) {
+                    $image_path = public_path('/storage/'.$image);
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+                }
+            }
+        });
+    }
+
 }

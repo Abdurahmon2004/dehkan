@@ -9,9 +9,9 @@ class Gallery extends Model
 {
     use HasTranslations;
 
-    protected $fillable = ['image', 'title'];
+    protected $fillable = ['image', 'title', 'description'];
 
-    public $translatable = ['title'];
+    public $translatable = ['title', 'description'];
 
 
     protected static function boot()

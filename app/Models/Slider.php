@@ -13,4 +13,15 @@ class Slider extends Model
     protected $fillable = ['title', 'description', 'image'];
 
     public $translatable = ['title', 'description'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            if ($model->image && file_exists(public_path('/storage/'.$model->image))) {
+                unlink(public_path('/storage/'.$model->image));
+            }
+        });
+    }
 }

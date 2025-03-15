@@ -43,14 +43,29 @@ class VideoResource extends Resource
                     ->preserveFilenames(false) // Asl fayl nomini o‘zgartirish
                     ->getUploadedFileNameForStorageUsing(fn ($file) => (string) md5(rand(1111,9999).microtime()).'.'. $file->getClientOriginalExtension())
                     ->required(),
-
-
                 FileUpload::make('thumbnail')
                     ->label('Thumbnail yuklash')
                     ->directory('thumbnails')
                     ->image()
                     ->maxSize(2048), // Maksimal 2MB
-
+                Tabs::make('Translations')
+                    ->tabs([
+                        Tab::make('O‘zbekcha')->schema([
+                            TextInput::make('title.uz')
+                                ->label('Nomi (Uzbek)')
+                                ->required(),
+                        ]),
+                        Tab::make('Русский')->schema([
+                            TextInput::make('title.ru')
+                                ->label('Nomi (Russian)')
+                                ->required(),
+                        ]),
+                        Tab::make('English')->schema([
+                            TextInput::make('title.en')
+                                ->label('Nomi (English)')
+                                ->required(),
+                        ]),
+                    ])->columnSpanFull(),
                 Tabs::make('Translations')
                     ->tabs([
                         Tab::make('O‘zbekcha')->schema([
@@ -77,11 +92,13 @@ class VideoResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('thumbnail')
-                    ->label('Rasm')
+                    ->label('Rasmi')
                     ->size(100),
-
                 TextColumn::make('text')
-                    ->label('Tavsif')
+                    ->label('Nomi')
+                    ->limit(50),
+                TextColumn::make('text')
+                    ->label('Tavsifi')
                     ->limit(50),
 
                 TextColumn::make('created_at')

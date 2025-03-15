@@ -11,5 +11,15 @@ class Service extends Model
     protected $fillable = ['image', 'description', 'title'];
 
     public $translatable = ['description', 'title'];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            if ($model->image && file_exists(public_path('/storage/'.$model->image))) {
+                unlink(public_path('/storage/'.$model->image));
+            }
+        });
+    }
 
 }

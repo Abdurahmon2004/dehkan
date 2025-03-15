@@ -73,6 +73,24 @@ class SiteInfoResource extends Resource
                                 ->required(),
                         ]),
                     ])->columnSpanFull(),
+                Tabs::make('Translations')
+                    ->tabs([
+                        Tab::make('O‘zbekcha')->schema([
+                            TextInput::make('description.uz')
+                                ->label('Tavsifi (Uzbek)')
+                                ->required(),
+                        ]),
+                        Tab::make('Русский')->schema([
+                            TextInput::make('description.ru')
+                                ->label('Tavsifi (Russian)')
+                                ->required(),
+                        ]),
+                        Tab::make('English')->schema([
+                            TextInput::make('description.en')
+                                ->label('Tavsifi (English)')
+                                ->required(),
+                        ]),
+                    ])->columnSpanFull(),
                 FileUpload::make('logo')
                 ->label('Logo')
                 ->image()
@@ -95,6 +113,8 @@ class SiteInfoResource extends Resource
                 ->label('Email'),
                 TextColumn::make('address')
                 ->label('Manzil'),
+                TextColumn::make('description')
+                    ->label('Tavsifi'),
             ])
             ->filters([
                 //
