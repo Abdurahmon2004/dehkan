@@ -140,7 +140,7 @@ class FullApiController extends Controller
         }
         return $this->data(ServiceResource::make($data));
     }
-    public function contact(): JsonResponse
+    public function contact()
     {
         $validator = Validator::make(request()->all(), [
            'name' => 'required',
