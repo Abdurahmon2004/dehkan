@@ -13,7 +13,7 @@ class Video extends Model
 
     protected $guarded = ['id'];
 
-    public $translatable = ['text'];
+    public $translatable = ['text', 'title'];
 
 
     protected static function boot()
