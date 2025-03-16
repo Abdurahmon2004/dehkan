@@ -94,7 +94,7 @@ class VideoResource extends Resource
                 ImageColumn::make('thumbnail')
                     ->label('Rasmi')
                     ->size(100),
-                TextColumn::make('text')
+                TextColumn::make('title')
                     ->label('Nomi')
                     ->limit(50),
                 TextColumn::make('text')
