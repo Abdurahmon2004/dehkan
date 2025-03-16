@@ -11,7 +11,7 @@ class Video extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['video', 'thumbnail', 'text'];
+    protected $guarded = ['id'];
 
     public $translatable = ['text'];
 
