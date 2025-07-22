@@ -62,7 +62,7 @@ class PartnerResource extends Resource
                             ->image()
                             ->maxSize(4096)
                             ->required(),
-                    ])->columnSpanFull(),
+                    ]),
             ]);
     }
 
