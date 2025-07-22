@@ -98,7 +98,7 @@ class PartnerResource extends Resource
     public static function getPages(): array
     {
         return [
-//            'index' => Pages\ListPartners::route('/'),
+            'index' => Pages\ListPartners::route('/'),
 //            'create' => Pages\CreatePartner::route('/create'),
 //            'edit' => Pages\EditPartner::route('/{record}/edit'),
         ];
